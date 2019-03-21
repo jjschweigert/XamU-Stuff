@@ -1,0 +1,11 @@
+<!-- Add a converter resource -->
+<ContentPage.Resources>
+    <ResourceDictionary>
+        <c:PWStrengthConverter x:Key="pwsCvt" />
+    </ResourceDictionary>
+</ContentPage.Resources>
+
+<!-- Use converter in view binding -->
+<Label TextColor="{Binding PasswordStrength,
+                   Converter={StaticResource pwsCvt},
+                   Mode=TwoWay}">

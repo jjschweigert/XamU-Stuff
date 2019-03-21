@@ -1,0 +1,38 @@
+<!-- Set list view source -->
+<ListView ItemsSource="{x:Static data:Cookbook.Recipes}" />
+
+<!-- Bind the list view selected item to based on a cusotm data type -->
+<ListView SelectedItem="{Binding SelectedRecipe, Mode=TwoWay}" />
+
+<!-- Item Tapped Event -->
+<ListView ItemTapped="OnRecipeTapped" />
+
+<!-- Implement pull to refresh bindings -->
+<ListView   IsPullToRefreshEnabled="True"
+            IsRefreshing="{Binding IsRefreshing, Mode=TwoWay}"
+            RefreshCommand="{Binding RefreshCommand}" />
+
+<!-- Custom list view cells -->
+<ListView>
+    <ListView.ItemTemplate>
+        <DataTemplate>
+            Custom view here
+        </DataTemplate>
+    </ListView.ItemTemplate>
+</ListView>
+
+<!-- Cell seperator -->
+<ListView SeperatorVisibility="None or Default" SeperatorColor="#90C0C0C0">
+
+<!-- Add context actions -->
+<Cell>
+    <Cell.ContextActions>
+        <MenuItem Clicked="OnClick" Text="Something" />
+        <!-- See OnDelete() in listview.cs for code behind implementation -->
+        <MenuItem Clicked="OnDelete" Text="Delete" IsDestructive="True" />
+        <!-- Use Command and CommandParameter and use current BindingContext to pass the current item to the command -->
+        <MenuItem   Text="Delete" IsDestructive="True"
+                    Command="{Binding DeleteCommand}"
+                    CommandParameter="{Binding .}" />
+    </Cell.ContextActions>
+</Cell>

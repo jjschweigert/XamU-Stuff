@@ -1,0 +1,17 @@
+<!-- Define a custom type resource in a resource dictionary -->
+<StackLayout>
+    <StackLayout.Resources>
+        <ResourceDictionary>
+            <!-- ToDo is a custom data type -->
+            <ToDo x:Key="getMilk" Title="Pickup some milk" />
+        </ResourceDictionary>
+    </StackLayout.Resources>
+    <!-- Use custom data resource -->
+    <Entry Text="{Binding Title, Source={StaticResource getMilk}}" />
+</StackLayout> 
+
+<StackLayout x:Name="GlobalBindingContextView">
+    <Entry Text="{Binding Title}" />
+    <Entry Text="{Binding Notes}" />
+    <Switch IsToggled="{Binding Completed}" />
+</StackLayout>

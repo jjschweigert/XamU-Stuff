@@ -1,0 +1,2 @@
+<!-- Set Binding Mode -->
+<Entry Text="{Binding Notes, Mode=TwoWay}">

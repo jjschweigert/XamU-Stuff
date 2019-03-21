@@ -1,0 +1,90 @@
+<!--  -->
+
+<!-- Define a dictionary of static resources -->
+<Page.Resources>
+    <ResourceDictionary>
+        <Color x:Key="bgColor">#c0c0c0</Color>
+    </ResourceDictionary>
+</Page.REsources>
+
+<!-- Implement a static resource in xaml -->
+<Grid BackgroundColor="{StaticResource bgColor}" />
+
+<!-- You can modify the resource dictionary in code behind, see resources_styles.cs -->
+<!-- Must first tell xamarin you need a dynamic resource which is done on a per element basis -->
+
+<Grid BackgroundColor="{DynamicResource bgColor}">
+
+    <!-- Could still have static resources, the dictionary is just a dictionary -->
+    <Label  Grid.Row="0" Grid.Column="0"
+            TextColor="{StaticResource bgColor}">
+</Grid>
+
+<!-- Property settings for resources must be applied on each element -->
+<Button x:Name="SomeButton"
+        BackgroundColor="{StaticResource someColor"
+        BorderColor="{StaticResource someOtherColor"
+        ...>
+<Button x:Name="SomeOtherButton"
+        BackgroundColor="{StaticResource someColor"
+        BorderColor="{StaticResource someOtherColor"
+        ...>
+
+<!-- Can create styles for a particular type of view. Styles require no lookup like a resource dictionary either. -->
+<!-- Using setters you can target specific properties with static values regardless of the view, but the target property must be bindable -->
+<!-- This could not be applied to a stack layout as a stack layout has no bindable property TextColor -->
+<Setter Property="TextColor" Value="White">
+
+<!-- Creating a Style -->
+<!-- Runtime exception if TargetType is not set or any of the properties are not bindable properties of TargetType -->
+<!-- Below we define two styles, one with and one without a key -->
+<!-- With Key - Explicit Style: Only applied when explicitly set on a control -->
+<!-- Without Key - Implicit Style: Automatically applied to all controls of the TargetType -->
+<!-- Without a key, all labels on this content page would have that style applied -->
+<ContentPage.Resources>
+    <ResourceDictionary>
+        <Style  x:Key="SomeStyle"
+                TargetType="Button">
+            <Setter Property="BackgroundColor" Value="#2A84D3">
+            <Setter Property="BorderColor" Value="#2A84D3">
+            <Setter Property="BorderRadius" Value="10">
+        </Style>
+        <Style TargetType="Label">
+            <Setter Property="TextColor" Value="#2A84D3">
+            <Setter Property="FontSize" Value="15">
+        </Style>
+    </ResourceDictionary>
+</ContentPage.Resources>
+
+<!-- Implement The Style As Static -->
+<Button Text="Ok" Style="{StaticResource SomeStyle}" />
+
+<!-- Implement The Style As Dynamic -->
+<Button Text="Ok" Style="{DynamicResource SomeStyle}" />
+
+<!-- Style Inheritance -->
+<Style  x:Key="BaseButtonStyle"
+        TargetType="Button" />
+
+<!-- Can only use static resources with BasedOn -->
+<Style  x:Key="SpecialButtonStyle"
+        TargetType="Button"
+        BasedOn="{StaticResource BaseButtonStyle}" />
+
+<!-- Resource Definition Hierarchy, searching happens in reverse order from view to application -->
+<Application>
+    <Page>
+        <Layout>
+            <View>
+            </View>
+        </Layout>
+    </Page>
+</Application>
+<!-- Resource Sharing Application Wide -->
+<!-- In App.xaml define a ResourceDictionary -->
+<Application.Resources>
+    <ResourceDictionary>
+        <Font  x:Key="CodeFont"
+               FontFamily="Courier New" />
+    </ResourceDictionary>
+</Application.Resources>
