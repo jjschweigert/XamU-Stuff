@@ -72,3 +72,10 @@ public void SetDataTemplate()
 
     listview.ItemTemplate = dt;
 }
+
+public void OnDelete(object sender, EventArgs e)
+{
+    MenuItem item = (MenuItem)sender;
+    Recipe recipe = (recipe)item.BindingContext;
+    Cookbook.Recipes.Remove(recipe);
+}

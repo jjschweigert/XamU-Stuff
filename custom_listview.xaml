@@ -1,0 +1,59 @@
+<!-- Skeleton for custom layout which uses a single child View object -->
+<Listview>
+    <ListView.ItemTemplate>
+        <DataTemplate>
+            <ViewCell>
+                <!-- Custom layout here -->
+            </ViewCell>
+        </DataTemplate>
+    </ListView.ItemTemplate>
+</Listview>
+
+<!-- Adding headers and footers -->
+<!-- The DataTemplate uses the binding of the Header property for the list view, not a separate binding -->
+<!-- Here the label's text will be bound -->
+<ListView Header="{Binding CustomHeaderObject}" Footer="{Binding CustomFooterObject}">
+    <ListView.HeaderTemplate>
+        <DataTemplate>
+            <!-- Custom template -->
+            <Label Text="{Binding CustomHeaderObject.HederProperty}">
+        </DataTemplate>
+    </ListView.HeaderTemplate>
+    <ListView.FooterTemplate>
+        <DataTemplate>
+            <!-- Custom template -->
+        </DataTemplate>
+    </ListView.FooterTemplate>
+</ListView>
+OR
+<ListView>
+    <ListView.Header>
+        <ContentView>
+            <!-- Add anything to content -->
+        </ContentView>
+    </ListView.Header>
+    <ListView.Footer>
+        <ContentView>
+            <!-- Add anything to content -->
+        </ContentView>
+    </ListView.Footer>
+</ListView>
+
+<!-- Specify a grouping header binding -->
+<ListView GroupDisplayBinding="{Binding Key}" />
+
+OR
+
+<ListView>
+    <ListView.GroupHeaderTemplate>
+        <DataTemplate>
+            <TextCell Text="{Binding Key}" Detail="{Binding Count, StringFormat='{0} items'}" />
+            </TextCell>
+        </DataTemplate>
+    </ListView.GroupHeaderTemplate>
+</ListView>
+
+<!-- Use quick jump -->
+<ListView   ItemsSource="{Binding .}"
+            IsGroupingEnabled="true"
+            GroupShortNameBinding="{Binding Key}">

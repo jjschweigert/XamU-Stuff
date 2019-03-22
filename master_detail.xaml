@@ -1,0 +1,14 @@
+<!-- Create a master page which houses how your navigation will look -->
+<!-- Title MUST be set -->
+
+<!-- Create regular content pages for the detail view -->
+<!-- These will just be all your apps normal pages -->
+
+<!-- Android and Windows include a menu icon for drawer navigation, iOS does not -->
+<ContentPage Title="Title">
+    <ContentPage.Icon>
+        <OnPlatform x:TypeArguments="FileImageSource">
+            <On Platform="iOS" Value="image.png">
+        </OnPlatform>
+    </ContentPage.Icon>
+</ContentPage>
