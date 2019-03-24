@@ -57,3 +57,16 @@ OR
 <ListView   ItemsSource="{Binding .}"
             IsGroupingEnabled="true"
             GroupShortNameBinding="{Binding Key}">
+
+<!-- Data Template Selector Implementation -->
+<ContentPage.Resources>
+    <ResourceDictionary>
+        <local:CharacterSelector x:Key = "ChatSelector" />
+    </ResourceDictionary>
+</ContentPage.Resources>
+<ListView   ItemTemplate="{StaticResource ChatSelector}"
+            ItemsSource="{Binding ChatHistory}"
+            HasUnevenRows="True" />
+
+<!-- Set Caching Strategy -->
+<ListView CachingStrategy="RecycleElement" />

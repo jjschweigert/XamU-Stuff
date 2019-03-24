@@ -58,3 +58,29 @@ public void SetGroup()
     ListView.ItemSource = groupedContacts;
     ListView.IsGroupingEnabled = true;
 }
+
+/* Data Template Selector */
+class ChatSelector : DataTemplateSelector
+{
+    public DataTemplate sentTemplate {get;set;}
+    public DataTemplate receivedTemplate {get;set;}
+
+    public ChatSelector()
+    {
+        sentTemplate = new DataTemplate(typeof(SentViewCell));
+        receivedTemplate = new DataTemplate(typeof(ReceivedViewCell));
+    }
+
+    /* This is called for each item in the list view, see custom_listview.xaml for implementation */
+    protected override DataTemplate OnSelectTemplate(object item, BindableObject container)
+    {
+        Message m = (Message)item;
+        return m.IsSentMessage ? sentTemplate : receivedTemplate;
+    }
+}
+
+/* Set Caching Strategy 
+   RetainElement - Create a new cell for each item in the data, used for large number of bindings (20+)
+   RecycleElement - Reuse cells that have scrolled off screen
+   RecycleElementAndDataTemplate - Reuse cells like RecycleElement and also cache the cells associated data template */
+var lv = new ListView(ListViewCachingStrategy.RecycleElement); 

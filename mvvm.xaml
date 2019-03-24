@@ -1,0 +1,9 @@
+<Label Text="{Binding Name" TextColor="Gray">
+    <Label.Triggers>
+        <DataTrigger    TargetType="Label"
+                        Binding="{Binding IsSupervisor}"
+                        Value="True">
+            <Setter Property="TextColor" Value="Blue">
+        </DataTrigger>
+    </Label.Triggers>
+</Label>
